@@ -9,7 +9,7 @@ app = FastAPI(title="SARA PRO API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # en producción: poner tu dominio de GitHub Pages
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -64,18 +64,20 @@ def promos_de(modelo: str, db: dict, pj: dict) -> list:
             if txt_m and txt_m not in vistos:
                 vistos.add(txt_m)
                 resultado.append({
-                    "descripcion": txt_m, "fuente": "csv_marca",
-                    "hasta": "", "_marca": otros.get("marca","").upper()
+                    "descripcion": txt_m,
+                    "fuente": "csv_marca",
+                    "hasta": "",
+                    "_marca": otros.get("marca","").upper()
                 })
     return resultado
 
 
-# ── modelos pydantic ────────────────────────────────────────────
+# ── MODELO CORREGIDO (CLAVE DEL ERROR) ──────────────────────────
 class PromoCreate(BaseModel):
-    cuotas:       Optional[str] = ""
-    bonificacion: Optional[str] = ""
-    descripcion:  Optional[str] = ""
-    hasta:        Optional[str] = ""
+    cuotas: Optional[str] = None
+    bonificacion: Optional[str] = None
+    descripcion: Optional[str] = None
+    hasta: Optional[str] = None
 
 
 # ── endpoints ───────────────────────────────────────────────────
@@ -110,8 +112,10 @@ def get_vehiculo(modelo: str):
 def comparar(m1: str, m2: str):
     db = cargar_vehiculos()
     a, b = m1.lower(), m2.lower()
-    if a not in db: raise HTTPException(404, f"Modelo '{m1}' no encontrado")
-    if b not in db: raise HTTPException(404, f"Modelo '{m2}' no encontrado")
+    if a not in db:
+        raise HTTPException(404, f"Modelo '{m1}' no encontrado")
+    if b not in db:
+        raise HTTPException(404, f"Modelo '{m2}' no encontrado")
     return {"modelo1": db[a], "modelo2": db[b]}
 
 @app.get("/promociones/{modelo}")
@@ -129,16 +133,22 @@ def get_promociones(modelo: str):
 def agregar_promocion(modelo: str, promo: PromoCreate):
     if not any([promo.cuotas, promo.bonificacion, promo.descripcion]):
         raise HTTPException(400, "Al menos un campo debe tener contenido.")
+
     if promo.hasta:
         try:
             datetime.strptime(promo.hasta, "%Y-%m-%d")
         except ValueError:
             raise HTTPException(400, "Formato de fecha inválido. Usar AAAA-MM-DD.")
+
     pj = cargar_promos()
     k  = modelo.lower()
+
     if k not in pj:
         pj[k] = []
-    pj[k].append({k: v for k, v in promo.model_dump().items() if v})
+
+    data = promo.dict(exclude_none=True)  # 🔥 clave corregida
+    pj[k].append(data)
+
     guardar_promos(pj)
     return {"ok": True, "total": len(pj[k])}
 
@@ -147,9 +157,12 @@ def eliminar_promocion(modelo: str, idx: int):
     pj  = cargar_promos()
     k   = modelo.lower()
     lst = pj.get(k, [])
+
     if idx < 0 or idx >= len(lst):
         raise HTTPException(404, "Índice no válido.")
+
     lst.pop(idx)
     pj[k] = lst
     guardar_promos(pj)
+
     return {"ok": True, "restantes": len(lst)}
