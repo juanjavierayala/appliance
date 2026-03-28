@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SARA PRO — Análisis y Referencia Automotor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+
+<!-- ══ HEADER ══════════════════════════════════════════ -->
+<header class="header">
+  <div class="header-left">
+    <span class="header-dot"></span>
+    <span class="header-logo">SARA PRO</span>
+    <span class="header-sub">Sistema de Análisis y Referencia Automotor</span>
+  </div>
+  <span class="badge-version">v5.0</span>
+</header>
+<div class="divider"></div>
+
+<!-- ══ BODY ════════════════════════════════════════════ -->
+<main class="body">
+
+  <!-- SELECTOR DE MODELOS -->
+  <section class="selector-card">
+    <div class="selector-cols">
+
+      <div class="selector-col">
+        <label class="selector-label accent">NUESTRO MODELO</label>
+        <div class="select-wrap">
+          <select id="sel-m1">
+            <option value="">Seleccioná un modelo…</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="selector-divider"></div>
+
+      <div class="selector-col">
+        <label class="selector-label muted">MODELO COMPETENCIA</label>
+        <div class="select-wrap">
+          <select id="sel-m2" disabled>
+            <option value="">Primero seleccioná nuestro modelo…</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BOTONES DE ACCIÓN -->
+  <div class="action-row">
+    <button class="btn btn-accent" id="btn-ficha1">⬡ Ficha Automotor</button>
+    <button class="btn btn-muted"  id="btn-ficha2">⬡ Ficha Competencia</button>
+    <button class="btn btn-indigo" id="btn-comp">⇄ Comparar</button>
+  </div>
+
+  <!-- PANEL RESULTADO -->
+  <section class="result-panel">
+
+    <!-- CABECERA DEL PANEL -->
+    <div class="result-header">
+      <span class="result-title">RESULTADO</span>
+      <span class="status-dot" id="status-dot"></span>
+    </div>
+    <div class="divider"></div>
+
+    <!-- TAB BAR -->
+    <nav class="tab-bar" id="tab-bar">
+      <button class="tab-btn active" data-tab="general">ⓘ General</button>
+      <button class="tab-btn" data-tab="dimensiones">⊡ Dimensiones</button>
+      <button class="tab-btn" data-tab="caracteristicas">≡ Características</button>
+      <button class="tab-btn" data-tab="precios">◈ Precios</button>
+      <button class="tab-btn tab-gold" data-tab="scorecard">★ Scorecard</button>
+      <button class="tab-btn tab-promo" data-tab="promociones">🏷 Promociones</button>
+    </nav>
+    <div class="divider"></div>
+
+    <!-- CONTENIDO TABS -->
+    <div class="tab-content" id="tab-content">
+      <div class="welcome-msg">
+        Seleccioná un modelo y usá los botones para ver la ficha o comparar.
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<!-- ══ STATUSBAR ════════════════════════════════════════ -->
+<div class="divider"></div>
+<footer class="statusbar">
+  <span id="status-msg">Listo</span>
+  <span id="db-count"></span>
+</footer>
+
+<!-- ══ MODAL PROMOCIÓN ══════════════════════════════════ -->
+<div class="modal-overlay" id="modal-overlay" hidden>
+  <div class="modal">
+    <div class="modal-accent-bar"></div>
+    <div class="modal-header">
+      <span id="modal-title">Nueva Promoción</span>
+      <button class="modal-close" id="modal-close">✕</button>
+    </div>
+    <div class="divider"></div>
+    <div class="modal-body">
+      <label class="field-label">💳 Cuotas sin interés</label>
+      <input type="text" id="promo-cuotas" placeholder="ej: 12 cuotas sin interés en Banco X" />
+
+      <label class="field-label">🎁 Bonificación / Regalo</label>
+      <input type="text" id="promo-bonif" placeholder="ej: Kit de accesorios incluido" />
+
+      <label class="field-label">📝 Descripción adicional</label>
+      <textarea id="promo-desc" rows="3" placeholder="Texto libre…"></textarea>
+
+      <label class="field-label">📅 Vigente hasta <small>(AAAA-MM-DD, vacío = sin vencimiento)</small></label>
+      <input type="text" id="promo-hasta" placeholder="2025-12-31" />
+
+      <div id="modal-error" class="modal-error" hidden></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-promo" id="modal-save">Guardar Promoción</button>
+      <button class="btn btn-ghost" id="modal-cancel">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/scorecard.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>
