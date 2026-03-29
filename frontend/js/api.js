@@ -1,7 +1,7 @@
 // ── Configuración ─────────────────────────────────────────────
 // En desarrollo: proxy via vite o servidor local en :8000
 // En producción: poner la URL de Render en VITE_API_URL o window.API_URL
-const API_URL = "https://sara-pro-api.onrender.com"
+const res = await fetch(API_URL + path, opts)
 
 async function req(path, opts = {}) {
   const res = await fetch(API + path, opts)
