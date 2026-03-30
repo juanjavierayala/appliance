@@ -50,8 +50,9 @@ async function init() {
     }
     setStatus('Listo')
   } catch(e) {
-    setStatus('⚠ No se pudo conectar con el backend')
-  }
+  console.error(e)
+  setStatus('⚠ Error: ' + e.message)
+}
 }
 
 // ══════════════════════════════════════════════════════════════
