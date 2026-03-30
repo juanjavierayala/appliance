@@ -1,10 +1,8 @@
 // ── Configuración ─────────────────────────────────────────────
 // En desarrollo: proxy via vite o servidor local en :8000
 // En producción: poner la URL de Render en VITE_API_URL o window.API_URL
-const res = await fetch(API_URL + path, opts)
-
 async function req(path, opts = {}) {
-  const res = await fetch(API + path, opts)
+  const res = await fetch(API_URL + path, opts)
   if (!res.ok) {
     const err = await res.json().catch(() => ({}))
     throw new Error(err.detail ?? `HTTP ${res.status}`)
