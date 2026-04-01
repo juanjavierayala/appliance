@@ -1,26 +1,26 @@
 /* ── Variables ───────────────────────────────────────────── */
 :root {
-  --bg:        #0D0F14;
-  --panel:     #14171F;
-  --card:      #1C2030;
-  --card-alt:  #202438;
-  --border:    #2D3448;
-  --accent:    #3B82F6;
-  --accent2:   #6366F1;
-  --text:      #E2E8F0;
+  --bg:        #F5F7FB;
+  --panel:     #FFFFFF;
+  --card:      #FFFFFF;
+  --card-alt:  #F1F5F9;
+  --border:    #E2E8F0;
+  --accent:    #2563EB;
+  --accent2:   #4F46E5;
+  --text:      #0F172A;
   --muted:     #64748B;
-  --success:   #22C55E;
-  --warn:      #EF4444;
-  --gold:      #F59E0B;
-  --promo:     #0EA5E9;
-  --promo-bg:  #0c1e2e;
+  --success:   #16A34A;
+  --warn:      #DC2626;
+  --gold:      #D97706;
+  --promo:     #0284C7;
+  --promo-bg:  #E0F2FE;
 
   --font-ui:   'Barlow', sans-serif;
   --font-head: 'Barlow Condensed', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   --radius:    6px;
-  --shadow:    0 4px 24px rgba(0,0,0,.5);
+  --shadow:    0 4px 24px rgba(0,0,0,.08);
 }
 
 /* ── Reset ───────────────────────────────────────────────── */
