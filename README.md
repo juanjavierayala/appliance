@@ -1,4 +1,4 @@
-# SARA PRO — Sistema de Análisis y Referencia Automotor
+# SARA PRO — Sistema de Análisis y Respuestas Automáticas
 
 Aplicación web para asesores comerciales de concesionarias automotrices.
 
